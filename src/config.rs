@@ -1,0 +1,1 @@
+pub const CATALOG_FILEPATH: &str= "./data/catalog.sch";
