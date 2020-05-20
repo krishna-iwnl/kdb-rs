@@ -5,7 +5,7 @@ use std::fs::File;
 use crate::defs;
 
 #[derive(Debug)]
-struct Attribute{
+pub struct Attribute{
     name : String,
     my_type: defs::Type,
 }
@@ -83,4 +83,33 @@ impl Schema{
             table_filename: table_filename,
         }
     }
+
+    pub fn find(&self, attname: &str) -> Option<usize> {
+        for (i,val) in self.my_atts.iter().enumerate() {
+            if val.name == attname {
+                return Some(i);
+            }
+        }
+        None
+    }
+    
+    pub fn find_type(&self, attname: &str) -> Option<&defs::Type> {
+        let result :&defs::Type;
+        for val in self.my_atts.iter() {
+            if val.name == attname {
+                result = &val.my_type;
+                return Some(result); 
+            }
+        }
+        None
+    }
+
+    pub fn get_num_atts(&self) -> usize {
+        self.num_atts
+    }
+
+    pub fn get_atts(&self) -> &Vec<Attribute> {
+        &self.my_atts
+    }
+    
 }

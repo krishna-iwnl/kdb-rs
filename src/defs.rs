@@ -14,7 +14,7 @@ pub enum CompOperator{
     Equals,
 }
 
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Type{
     Int,
     Double,
