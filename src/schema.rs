@@ -1,16 +1,19 @@
+#[cfg(test)]
+#[path = "./schema_test.rs"]
+pub mod schema_test;
 use std::io::prelude::*;
 
 use std::io::{BufReader};
 use std::fs::File;
 use crate::defs;
 
-#[derive(Debug)]
+#[derive(Debug,PartialEq)]
 pub struct Attribute{
     name : String,
     my_type: defs::Type,
 }
 
-#[derive(Debug)]
+#[derive(Debug,PartialEq)]
 pub struct Schema{
     num_atts: usize,
     my_atts: Vec<Attribute>,
@@ -26,7 +29,6 @@ impl Schema{
             Err(why) => panic!("couldn't open {}:" ,why.to_string()),
             Ok(file) => file,
         };
-
 
         let mut buf_reader = BufReader::new(file);
         let mut found = false;
@@ -60,6 +62,7 @@ impl Schema{
         if catalog_vector.len()==0 {
             panic!("Atts are empty!");
         }
+        
         let mut table_filename:String=String::from("error");
         let mut my_atts: Vec<Attribute> = Vec::new();
         for (i,val) in catalog_vector.iter().enumerate(){
