@@ -10,7 +10,7 @@ use crate::defs;
 #[derive(Debug,PartialEq)]
 pub struct Attribute{
     name : String,
-    my_type: defs::Type,
+    pub my_type: defs::Type,
 }
 
 #[derive(Debug,PartialEq)]
@@ -74,7 +74,7 @@ impl Schema{
                 let att :Attribute = match att_type[1] {
                     "String" => Attribute{name: att_type[0].to_string(),my_type: defs::Type::String},
                     "Int" => Attribute{name: att_type[0].to_string(),my_type: defs::Type::Int},
-                    "Double" => Attribute{name: att_type[0].to_string(),my_type: defs::Type::Double},
+                    "Double" => Attribute{name: att_type[0].to_string(),my_type: defs::Type::Float},
                     _ => panic!("Wrong type in schema!"),
                 };
                 my_atts.push(att);
